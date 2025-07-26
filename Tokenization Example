@@ -1,0 +1,395 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "55c28bce",
+   "metadata": {
+    "_cell_guid": "b1076dfc-b9ad-4769-8c92-a6c4dae69d19",
+    "_uuid": "8f2839f25d086af736a60e9eeb907d3b93b6e0e5",
+    "execution": {
+     "iopub.execute_input": "2025-07-26T04:59:18.320885Z",
+     "iopub.status.busy": "2025-07-26T04:59:18.320541Z",
+     "iopub.status.idle": "2025-07-26T05:00:24.543497Z",
+     "shell.execute_reply": "2025-07-26T05:00:24.542623Z"
+    },
+    "papermill": {
+     "duration": 66.229683,
+     "end_time": "2025-07-26T05:00:24.546599",
+     "exception": false,
+     "start_time": "2025-07-26T04:59:18.316916",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "[nltk_data] Error loading punkt: <urlopen error [Errno -3] Temporary\n",
+      "[nltk_data]     failure in name resolution>\n",
+      "[nltk_data] Error loading punkt_tab: <urlopen error [Errno -3]\n",
+      "[nltk_data]     Temporary failure in name resolution>\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "['the', 'quick', 'brown', 'fox', 'jumps', 'over', 'the', 'lazy', 'dog']"
+      ]
+     },
+     "execution_count": 1,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import nltk\n",
+    "from collections import defaultdict\n",
+    "import random\n",
+    "\n",
+    "# Download required resources\n",
+    "nltk.download('punkt')\n",
+    "nltk.download('punkt_tab')\n",
+    "\n",
+    "# Sample corpus\n",
+    "corpus = \"the quick brown fox jumps over the lazy dog\"\n",
+    "\n",
+    "# Tokenize the corpus\n",
+    "tokens = nltk.word_tokenize(corpus)\n",
+    "\n",
+    "tokens"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "8767d84c",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2025-07-26T05:00:24.552689Z",
+     "iopub.status.busy": "2025-07-26T05:00:24.551869Z",
+     "iopub.status.idle": "2025-07-26T05:00:24.557265Z",
+     "shell.execute_reply": "2025-07-26T05:00:24.556624Z"
+    },
+    "papermill": {
+     "duration": 0.009534,
+     "end_time": "2025-07-26T05:00:24.558519",
+     "exception": false,
+     "start_time": "2025-07-26T05:00:24.548985",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[('the', 'quick'),\n",
+       " ('quick', 'brown'),\n",
+       " ('brown', 'fox'),\n",
+       " ('fox', 'jumps'),\n",
+       " ('jumps', 'over'),\n",
+       " ('over', 'the'),\n",
+       " ('the', 'lazy'),\n",
+       " ('lazy', 'dog')]"
+      ]
+     },
+     "execution_count": 2,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Create bigrams\n",
+    "bigrams = list(nltk.bigrams(tokens))\n",
+    "\n",
+    "bigrams"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "2765bd3e",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2025-07-26T05:00:24.564224Z",
+     "iopub.status.busy": "2025-07-26T05:00:24.563550Z",
+     "iopub.status.idle": "2025-07-26T05:00:24.569104Z",
+     "shell.execute_reply": "2025-07-26T05:00:24.568231Z"
+    },
+    "papermill": {
+     "duration": 0.009603,
+     "end_time": "2025-07-26T05:00:24.570371",
+     "exception": false,
+     "start_time": "2025-07-26T05:00:24.560768",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "defaultdict(int, {})"
+      ]
+     },
+     "execution_count": 3,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Count unigrams and bigrams\n",
+    "unigram_counts = defaultdict(int)\n",
+    "bigram_counts = defaultdict(int)\n",
+    "\n",
+    "unigram_counts"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "6eaa6a67",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2025-07-26T05:00:24.576187Z",
+     "iopub.status.busy": "2025-07-26T05:00:24.575542Z",
+     "iopub.status.idle": "2025-07-26T05:00:24.580402Z",
+     "shell.execute_reply": "2025-07-26T05:00:24.579667Z"
+    },
+    "papermill": {
+     "duration": 0.00902,
+     "end_time": "2025-07-26T05:00:24.581726",
+     "exception": false,
+     "start_time": "2025-07-26T05:00:24.572706",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "defaultdict(int, {})"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "bigram_counts"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "bf813960",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2025-07-26T05:00:24.587470Z",
+     "iopub.status.busy": "2025-07-26T05:00:24.587213Z",
+     "iopub.status.idle": "2025-07-26T05:00:24.592396Z",
+     "shell.execute_reply": "2025-07-26T05:00:24.591795Z"
+    },
+    "papermill": {
+     "duration": 0.009429,
+     "end_time": "2025-07-26T05:00:24.593509",
+     "exception": false,
+     "start_time": "2025-07-26T05:00:24.584080",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "defaultdict(int,\n",
+       "            {'the': 2,\n",
+       "             'quick': 1,\n",
+       "             'brown': 1,\n",
+       "             'fox': 1,\n",
+       "             'jumps': 1,\n",
+       "             'over': 1,\n",
+       "             'lazy': 1,\n",
+       "             'dog': 1})"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "for word in tokens:\n",
+    "    unigram_counts[word] += 1\n",
+    "\n",
+    "unigram_counts"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "289d2731",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2025-07-26T05:00:24.600022Z",
+     "iopub.status.busy": "2025-07-26T05:00:24.599742Z",
+     "iopub.status.idle": "2025-07-26T05:00:24.605744Z",
+     "shell.execute_reply": "2025-07-26T05:00:24.604746Z"
+    },
+    "papermill": {
+     "duration": 0.010707,
+     "end_time": "2025-07-26T05:00:24.607108",
+     "exception": false,
+     "start_time": "2025-07-26T05:00:24.596401",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "defaultdict(int,\n",
+       "            {('the', 'quick'): 1,\n",
+       "             ('quick', 'brown'): 1,\n",
+       "             ('brown', 'fox'): 1,\n",
+       "             ('fox', 'jumps'): 1,\n",
+       "             ('jumps', 'over'): 1,\n",
+       "             ('over', 'the'): 1,\n",
+       "             ('the', 'lazy'): 1,\n",
+       "             ('lazy', 'dog'): 1})"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "for w1, w2 in bigrams:\n",
+    "    bigram_counts[(w1, w2)] += 1\n",
+    "\n",
+    "bigram_counts"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "e577387c",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2025-07-26T05:00:24.613101Z",
+     "iopub.status.busy": "2025-07-26T05:00:24.612845Z",
+     "iopub.status.idle": "2025-07-26T05:00:24.619606Z",
+     "shell.execute_reply": "2025-07-26T05:00:24.618781Z"
+    },
+    "papermill": {
+     "duration": 0.011081,
+     "end_time": "2025-07-26T05:00:24.620804",
+     "exception": false,
+     "start_time": "2025-07-26T05:00:24.609723",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Generated Text:\n",
+      "need\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Bigram probability calculation using MLE\n",
+    "def bigram_probability(w1, w2):\n",
+    "    return bigram_counts[(w1, w2)] / unigram_counts[w1]\n",
+    "\n",
+    "# Generate text using bigram model\n",
+    "def generate_text(start_word, length=10):\n",
+    "    current_word = start_word\n",
+    "    result = [current_word]\n",
+    "\n",
+    "    for _ in range(length - 1):\n",
+    "        # Get all possible next words\n",
+    "        candidates = []\n",
+    "        for key in bigram_counts:\n",
+    "            w1, w2 = key\n",
+    "            if w1 == current_word:\n",
+    "                prob = bigram_probability(w1, w2)\n",
+    "                candidates.append((w2, prob))\n",
+    "\n",
+    "        if not candidates:\n",
+    "            break\n",
+    "\n",
+    "        # Choose next word based on probability\n",
+    "        words = []\n",
+    "        weights = []\n",
+    "        for word, prob in candidates:\n",
+    "            words.append(word)\n",
+    "            weights.append(prob)\n",
+    "        next_word = random.choices(words, weights=weights)[0]\n",
+    "\n",
+    "\n",
+    "        result.append(next_word)\n",
+    "        current_word = next_word\n",
+    "\n",
+    "    return ' '.join(result)\n",
+    "\n",
+    "# Example usage\n",
+    "print(\"Generated Text:\")\n",
+    "print(generate_text(\"need\"))"
+   ]
+  }
+ ],
+ "metadata": {
+  "kaggle": {
+   "accelerator": "none",
+   "dataSources": [],
+   "dockerImageVersionId": 31089,
+   "isGpuEnabled": false,
+   "isInternetEnabled": false,
+   "language": "python",
+   "sourceType": "notebook"
+  },
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.13"
+  },
+  "papermill": {
+   "default_parameters": {},
+   "duration": 72.527966,
+   "end_time": "2025-07-26T05:00:25.242077",
+   "environment_variables": {},
+   "exception": null,
+   "input_path": "__notebook__.ipynb",
+   "output_path": "__notebook__.ipynb",
+   "parameters": {},
+   "start_time": "2025-07-26T04:59:12.714111",
+   "version": "2.6.0"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
